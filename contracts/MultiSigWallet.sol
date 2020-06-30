@@ -106,10 +106,23 @@ contract MultiSigWallet {
         emit RevokeConfirmation(msg.sender, _txIndex);
     }
 
+    function getOwners() public view returns(address[] memory) {
+        return owners;
+    }
+
+    function getTransactionCount() public view returns(uint) {
+        return transactions.length;
+    }
+
     function getTransaction(uint _txIndex) public view 
         returns(address to, uint value, bytes memory data, bool executed, uint confirmations) {
             Transaction storage transaction = transactions[_txIndex];
 
             return(transaction.to, transaction.value, transaction.data, transaction.executed, transaction.confirmations);
+    }
+
+    function isConfirmed(uint _txIndex, address _owner) public view returns(bool) {
+        Transaction storage transaction = transactions[_txIndex];
+        return transaction.isConfirmed[_owner];
     }
 }
