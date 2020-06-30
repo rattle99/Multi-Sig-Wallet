@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.5.0 <0.7.0;
+pragma solidity >=0.6.0 <0.7.0;
 
 contract MultiSigWallet {
 
@@ -40,7 +40,7 @@ contract MultiSigWallet {
         confirmationsRequired = _confirmationsRequired;
     }
 
-    receive () payable external {
+    receive () external payable {
         emit Deposit(msg.sender, msg.value, address(this).balance);
     }
 
@@ -104,5 +104,12 @@ contract MultiSigWallet {
         transaction.confirmations -= 1;
 
         emit RevokeConfirmation(msg.sender, _txIndex);
+    }
+
+    function getTransaction(uint _txIndex) public view 
+        returns(address to, uint value, bytes memory data, bool executed, uint confirmations) {
+            Transaction storage transaction = transactions[_txIndex];
+
+            return(transaction.to, transaction.value, transaction.data, transaction.executed, transaction.confirmations);
     }
 }
