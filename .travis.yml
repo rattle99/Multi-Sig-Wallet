@@ -1,0 +1,9 @@
+dist: bionic
+language: node_js
+node_js:
+    - "lts/erbium"
+install:
+    - npm ci
+script:
+    - npm run test
+    - npm run coverage

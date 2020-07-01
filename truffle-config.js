@@ -28,7 +28,11 @@ module.exports = {
     },
   },
   mocha: {
-
+    reporter: 'eth-gas-reporter',
+    reporterOptions : { 
+      currency: 'USD',
+      excludeContracts: ['Migrations'] 
+    }
   },
   contracts_directory: './contracts',
   contracts_build_directory: './build/contracts',
@@ -42,5 +46,6 @@ module.exports = {
         }
       }
     }
-  }
+  },
+  plugins: ['solidity-coverage'],
 }
