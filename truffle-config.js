@@ -5,7 +5,7 @@ const mnemonic = process.env.MNEMONIC;
 
 module.exports = {
   networks: {
-    development: {
+    ganache: {
       host: "127.0.0.1",
       port: 7545,
       network_id: 5777 
@@ -13,6 +13,14 @@ module.exports = {
     ropsten: {
       provider: new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${infuraKey}`),
       network_id: 3, 
+      gas: 5500000, 
+      confirmations: 2, 
+      timeoutBlocks: 200, 
+      skipDryRun: true, 
+    },
+    rinkeby: {
+      provider: new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraKey}`),
+      network_id: 4, 
       gas: 5500000, 
       confirmations: 2, 
       timeoutBlocks: 200, 
